@@ -550,7 +550,7 @@ hvs_trans_connect(struct socket *so, struct sockaddr *nam, struct thread *td)
 		}
 	}
 
-	if (found_auto_bound_port == true) {
+	if (found_auto_bound_port) {
 		/* Found available port for auto bound, put on list */
 		__hvs_insert_socket_on_list(so, HVS_LIST_BOUND);
 		/* Set VM service ID */
@@ -578,7 +578,7 @@ hvs_trans_connect(struct socket *so, struct sockaddr *nam, struct thread *td)
 out:
 	mtx_unlock(&hvs_trans_socks_mtx);
 
-	if (found_auto_bound_port == true)
+	if (found_auto_bound_port)
 		 vmbus_req_tl_connect(&pcb->vm_srv_id, &pcb->host_srv_id);
 
 	return (error);
@@ -621,7 +621,7 @@ hvs_trans_soreceive(struct socket *so, struct sockaddr **paddr,
 	struct sockbuf *sb;
 	ssize_t orig_resid;
 	uint32_t canread, to_read;
-	int flags, error = 0;
+	int flags = 0, error = 0;
 	struct hvs_callback_arg cbarg;
 
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
@@ -634,8 +634,6 @@ hvs_trans_soreceive(struct socket *so, struct sockaddr **paddr,
 
 	if (flagsp != NULL)
 		flags = *flagsp &~ MSG_EOR;
-	else
-		flags = 0;
 
 	if (flags & MSG_PEEK)
 		return (EOPNOTSUPP);
@@ -1205,9 +1203,10 @@ hvsock_send_data(struct vmbus_channel *chan, struct uio *uio,
 	cbarg.uio = uio;
 	cbarg.sb = sb;
 
+	iov[0].iov_base = &hvs_pkt;
+	iov[0].iov_len = hvs_pkthlen;
+
 	if (uio && to_write > 0) {
-		iov[0].iov_base = &hvs_pkt;
-		iov[0].iov_len = hvs_pkthlen;
 		iov[1].iov_base = NULL;
 		iov[1].iov_len = to_write;
 		iov[2].iov_base = &pad;
@@ -1215,14 +1214,10 @@ hvsock_send_data(struct vmbus_channel *chan, struct uio *uio,
 
 		error = vmbus_chan_iov_send(chan, iov, 3,
 		    hvsock_br_callback, &cbarg);
-	} else {
-		if (to_write == 0) {
-			iov[0].iov_base = &hvs_pkt;
-			iov[0].iov_len = hvs_pkthlen;
-			iov[1].iov_base = &pad;
-			iov[1].iov_len = pad_pktlen - hvs_pktlen;
-			error = vmbus_chan_iov_send(chan, iov, 2, NULL, NULL);
-		}
+	} else if (to_write == 0) {
+		iov[1].iov_base = &pad;
+		iov[1].iov_len = pad_pktlen - hvs_pktlen;
+		error = vmbus_chan_iov_send(chan, iov, 2, NULL, NULL);
 	}
 
 	if (error) {
@@ -1243,7 +1238,7 @@ hvsock_send_data(struct vmbus_channel *chan, struct uio *uio,
 static uint32_t
 hvsock_canread_check(struct hvs_pcb *pcb)
 {
-	uint32_t advance;
+	uint32_t advance = 0;
 	uint32_t tlen, hlen, dlen;
 	uint32_t bytes_canread = 0;
 	int error;
@@ -1260,8 +1255,6 @@ hvsock_canread_check(struct hvs_pcb *pcb)
 	if (pcb->rb_init)
 		advance =
 		    VMBUS_CHANPKT_GETLEN(pcb->hvs_pkt.chan_pkt_hdr.cph_tlen);
-	else
-		advance = 0;
 
 	bytes_canread = vmbus_chan_read_available(pcb->chan);
 
@@ -1329,7 +1322,7 @@ hvsock_canread_check(struct hvs_pcb *pcb)
 		pcb->so->so_error = EIO;
 		return (0);
 	}
-	if (pcb->rb_init == false)
+	if (!pcb->rb_init)
 		pcb->rb_init = true;
 
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
@@ -1564,7 +1557,7 @@ hvsock_open_connection(struct vmbus_channel *chan, struct hvsock_sc *sc)
 	HVSOCK_DBG(HVSOCK_DBG_INFO, "inst_guid is ");
 	hvsock_print_guid(inst_guid);
 	HVSOCK_DBG(HVSOCK_DBG_INFO, "connection %s host\n",
-	    (conn_from_host == true ) ? "from" : "to");
+	    conn_from_host ? "from" : "to");
 
 	/*
 	 * The listening port should be in [0, MAX_LISTEN_PORT]
