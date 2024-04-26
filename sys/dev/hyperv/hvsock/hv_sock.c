@@ -350,14 +350,9 @@ hvs_trans_attach(struct socket *so, int proto, struct thread *td)
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_attach called\n", __func__);
 
-	if (so->so_type != SOCK_STREAM)
-		return (ESOCKTNOSUPPORT);
-
 	if (proto != 0 && proto != HYPERV_SOCK_PROTO_TRANS)
 		return (EPROTONOSUPPORT);
 
-	if (pcb != NULL)
-		return (EISCONN);
 	pcb = malloc(sizeof(struct hvs_pcb), M_HVSOCK, M_NOWAIT | M_ZERO);
 	if (pcb == NULL)
 		return (ENOMEM);
@@ -378,10 +373,6 @@ hvs_trans_detach(struct socket *so)
 
 	(void) hvs_trans_lock();
 	pcb = so2hvspcb(so);
-	if (pcb == NULL) {
-		hvs_trans_unlock();
-		return;
-	}
 
 	if (SOLISTENING(so)) {
 		bzero(pcb, sizeof(*pcb));
@@ -404,10 +395,6 @@ hvs_trans_bind(struct socket *so, struct sockaddr *addr, struct thread *td)
 	    "%s: HyperV Socket hvs_trans_bind called\n", __func__);
 
 	if (sa == NULL) {
-		return (EINVAL);
-	}
-
-	if (pcb == NULL) {
 		return (EINVAL);
 	}
 
@@ -455,9 +442,6 @@ hvs_trans_listen(struct socket *so, int backlog, struct thread *td)
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_listen called\n", __func__);
 
-	if (pcb == NULL)
-		return (EINVAL);
-
 	/* Check if the address is already bound and it was by us. */
 	bound_so = hvs_find_socket_on_list(&pcb->local_addr, HVS_LIST_BOUND);
 	if (bound_so == NULL || bound_so != so) {
@@ -485,9 +469,6 @@ hvs_trans_accept(struct socket *so, struct sockaddr *sa)
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_accept called\n", __func__);
 
-	if (pcb == NULL)
-		return (EINVAL);
-
 	memcpy(sa, &pcb->remote_addr, pcb->remote_addr.sa_len);
 
 	return (0);
@@ -504,9 +485,6 @@ hvs_trans_connect(struct socket *so, struct sockaddr *nam, struct thread *td)
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_connect called, remote port is %x\n",
 	    __func__, raddr->hvs_port);
-
-	if (pcb == NULL)
-		return (EINVAL);
 
 	/* Verify the remote address */
 	if (raddr == NULL)
@@ -587,17 +565,10 @@ out:
 int
 hvs_trans_disconnect(struct socket *so)
 {
-	struct hvs_pcb *pcb;
-
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_disconnect called\n", __func__);
 
 	(void) hvs_trans_lock();
-	pcb = so2hvspcb(so);
-	if (pcb == NULL) {
-		hvs_trans_unlock();
-		return (EINVAL);
-	}
 
 	/* If socket is already disconnected, skip this */
 	if ((so->so_state & SS_ISDISCONNECTED) == 0)
@@ -626,11 +597,6 @@ hvs_trans_soreceive(struct socket *so, struct sockaddr **paddr,
 
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_soreceive called\n", __func__);
-
-	if (so->so_type != SOCK_STREAM)
-		return (EINVAL);
-	if (pcb == NULL)
-		return (EINVAL);
 
 	if (flagsp != NULL)
 		flags = *flagsp &~ MSG_EOR;
@@ -790,11 +756,6 @@ hvs_trans_sosend(struct socket *so, struct sockaddr *addr, struct uio *uio,
 	    "%s: HyperV Socket hvs_trans_sosend called, uio_resid = %zd\n",
 	    __func__, uio->uio_resid);
 
-	if (so->so_type != SOCK_STREAM)
-		return (EINVAL);
-	if (pcb == NULL)
-		return (EINVAL);
-
 	/* If nothing to send */
 	if (uio->uio_resid == 0 || uio->uio_rw != UIO_WRITE)
 		return (EINVAL);
@@ -881,9 +842,6 @@ hvs_trans_peeraddr(struct socket *so, struct sockaddr *sa)
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_peeraddr called\n", __func__);
 
-	if (pcb == NULL)
-		return (EINVAL);
-
 	memcpy(sa, &pcb->remote_addr, pcb->remote_addr.sa_len);
 
 	return (0);
@@ -896,9 +854,6 @@ hvs_trans_sockaddr(struct socket *so, struct sockaddr *sa)
 
 	HVSOCK_DBG(HVSOCK_DBG_VERBOSE,
 	    "%s: HyperV Socket hvs_trans_sockaddr called\n", __func__);
-
-	if (pcb == NULL)
-		return (EINVAL);
 
 	memcpy(sa, &pcb->local_addr, pcb->local_addr.sa_len);
 
@@ -955,10 +910,6 @@ hvs_trans_abort(struct socket *so)
 	    "%s: HyperV Socket hvs_trans_abort called\n", __func__);
 
 	(void) hvs_trans_lock();
-	if (pcb == NULL) {
-		hvs_trans_unlock();
-		return;
-	}
 
 	if (SOLISTENING(so)) {
 		mtx_lock(&hvs_trans_socks_mtx);
@@ -990,9 +941,6 @@ hvs_trans_shutdown(struct socket *so, enum shutdown_how how)
 		return (ENOTCONN);
 	}
 	SOCK_UNLOCK(so);
-
-	if (pcb == NULL)
-		return (EINVAL);
 
 	switch (how) {
 	case SHUT_RD:
