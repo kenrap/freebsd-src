@@ -39,7 +39,8 @@
 #include <machine/_align.h>
 
 /**
- * Definitions related to sockets: types, address families, options.
+ * @file socket.h
+ * @brief Definitions related to sockets: types, address families, options.
  */
 
 /**
@@ -691,15 +692,79 @@ struct splice {
 #include <sys/cdefs.h>
 
 __BEGIN_DECLS
-int	accept(int, struct sockaddr * __restrict, socklen_t * __restrict);
-int	bind(int, const struct sockaddr *, socklen_t);
-int	connect(int, const struct sockaddr *, socklen_t);
+
+/**
+ * @brief Accept a connection on a socket.
+ *
+ * @param socket A socket created with socket(2).
+ * @param addr A result filled-in with the address of the connecting entity.
+ * @param addrlen A value-result argument.
+ *
+ * @return Contains the bytes length of the address returned.
+ *
+ * @note A null pointer may be specified for addr if the address information is not desired.
+ * If addr is specified with null then addrlen is not used and should also be null.
+ * This call is used with connection-based socket types, currently with SOCK_STREAM.
+ */
+int	accept(int socket, struct sockaddr * __restrict addr, socklen_t * __restrict addrlen);
+
+/**
+ * @brief A system call that assigns the local protocol address to a socket.
+ *
+ * @param socket A socket created with socket(2).
+ * @param addr A result filled-in with the address of the connecting entity.
+ * @param addrlen A value-result argument.
+ *
+ * @return 0 If successful.
+ * @return -1 Otherwise and with the global variable errno set to indicate the error.
+ * @note When a socket is created with socket(2) it exists in an address family space but has no protocol address assigned.
+ * It requests that addr be assigned to the socket.
+ */
+int	bind(int socket, const struct sockaddr * addr, socklen_t addrlen);
+
+/**
+ * @brief Initiate a connection on a socket.
+ *
+ * @param socket A socket created with socket(2).
+ * Socket type effects:
+ * * SOCK_DGRAM: This call specifies the peer with which the socket is to be associated; this address is that to which datagrams
+ * are to be sent, and the only address from which datagrams are to be received.
+ * * SOCK_STREAM: This call attempts to make a connection to another socket.
+ * @param name The other socket which is an address in the communications space of the socket.
+ * @param namelen Indicates the amount of space in bytes pointed to by name; the sa_len member of name is ignored.
+ * @return 0 If successful.
+ * @return -1 Otherwise and with the global variable errno set to indicate the error.
+ */
+int	connect(int socket, const struct sockaddr * name, socklen_t namelen);
+
 #if __BSD_VISIBLE
+
 int	accept4(int, struct sockaddr * __restrict, socklen_t * __restrict, int);
+
+/**
+ * @brief 
+ *
+ * @param fd
+ * @param socket A socket created with socket(2).
+ * @param addr A result filled-in with the address of the connecting entity.
+ * @param addrlen A value-result argument.
+ * @return 0 If successful.
+ * @return -1 Otherwise and with the global variable errno set to indicate the error.
+*/
 int	bindat(int, int, const struct sockaddr *, socklen_t);
+
 int	connectat(int, int, const struct sockaddr *, socklen_t);
 #endif
-int	getpeername(int, struct sockaddr * __restrict, socklen_t * __restrict);
+
+/**
+ * @brief 
+ *
+ * @param socket
+ * @param name
+ * @param namelen
+*/
+int	getpeername(int socket, struct sockaddr * __restrict name, socklen_t * __restrict namelen);
+
 int	getsockname(int, struct sockaddr * __restrict, socklen_t * __restrict);
 int	getsockopt(int, int, int, void * __restrict, socklen_t * __restrict);
 int	listen(int, int);
